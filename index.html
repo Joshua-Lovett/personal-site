@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Joshua Lovett</title>
+<meta name="description" content="Joshua Lovett's personal site: about me and completed projects.">
+<meta name="theme-color" content="#0b0909">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<script src="/assets/lib.js"></script>
+<script>
+shell("#about");
+let P = null;
+const ROUTES = ["about", "projects"];
+const cur = () => { const id = location.hash.slice(1); return ROUTES.includes(id) ? id : "about"; };
+
+function aboutView() {
+  return h("div", {},
+    h("section", { class: "hero" },
+      h("p", { class: "eyebrow" }, "Personal site"),
+      h("h1", {}, P.name[0], h("span", {}, P.name[1])),
+      h("p", { class: "lede" }, P.tagline)),
+    h("div", { class: "prose" }, P.about.map((t) => h("p", {}, t))),
+    h("dl", { class: "facts" }, P.facts.map((f) => h("div", {}, h("dt", {}, f.k), h("dd", {}, f.v)))));
+}
+function projectsView() {
+  return h("div", {},
+    pageHead("Public", "Completed projects", "Finished work, with what it was and what came out of it."),
+    P.projects.length
+      ? h("div", { class: "grid" }, P.projects.map((p) => h("article", { class: "card" },
+          h("div", { class: "top" }, h("h3", {}, p.title), p.year ? h("span", { class: "tag" }, p.year) : null),
+          h("p", {}, p.summary),
+          p.url ? h("a", { href: p.url, target: "_blank", rel: "noopener" }, "View project") : null)))
+      : empty("Nothing published yet", "Finished projects appear here as soon as they are added."));
+}
+function render() {
+  const id = cur();
+  renderNav([
+    { label: "Public", links: [{ id: "about", href: "#about", label: "About" }, { id: "projects", href: "#projects", label: "Projects" }] },
+    { label: "Private", links: [{ id: "private", href: "/private/", label: "Sign in", out: true }] }
+  ], id);
+  const main = document.getElementById("main");
+  if (!P) { main.replaceChildren(h("div", { class: "err" }, "This page could not load. Refresh to try again.")); return; }
+  main.replaceChildren(id === "about" ? aboutView() : projectsView());
+}
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+load("/data/public.json").then((d) => { P = d; render(); }).catch(() => render());
+render();
+</script>
+<noscript><p style="padding:24px;color:#f4ede9">This site needs JavaScript to display.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": ["Joshua", "Lovett"],
+  "tagline": "Building things, finishing them, and writing down what is next.",
+  "about": [
+    "This is my corner of the web. Public pages cover who I am and what I have finished. Everything else is private: my goals, my dreamboard, my schedule, and a log of what I have done.",
+    "I keep it current by telling Claude what I did and what is coming up, and the site updates itself."
+  ],
+  "facts": [
+    { "k": "Based in", "v": "United States" },
+    { "k": "Focus", "v": "Projects, websites, getting things done" },
+    { "k": "Currently", "v": "Building this site" }
+  ],
+  "projects": []
+}
