@@ -13,14 +13,15 @@
 </head>
 <body>
 <script src="/assets/lib.js"></script>
+<script src="/assets/config.js"></script>
 <script>
-shell("/#about");
+shell(PUBLIC_URL + "/#about");
 const ROUTES = [["todos", "To-dos"], ["goals", "Goals"], ["dreamboard", "Dreamboard"], ["done", "Done"], ["connections", "Connections"]];
 const cur = () => { const id = location.hash.slice(1); return ROUTES.some((r) => r[0] === id) ? id : "todos"; };
 let todoFilter = "today";
 try { todoFilter = localStorage.getItem("todoFilter") || "today"; } catch (e) {}
 
-const items = async (k) => (await load("/private/data/" + k + ".json")).items || [];
+const items = async (k) => (await load("/data/" + k + ".json")).items || [];
 
 /* ---- to-dos ---- */
 async function todosView() {
@@ -117,7 +118,7 @@ const VIEWS = { todos: todosView, goals: goalsView, dreamboard: dreamView, done:
 async function render() {
   const id = cur();
   renderNav([
-    { label: "Public", links: [{ id: "home", href: "/#about", label: "About", out: true }, { id: "home2", href: "/#projects", label: "Projects", out: true }] },
+    { label: "Public", links: [{ id: "home", href: PUBLIC_URL + "/#about", label: "About", out: true }, { id: "home2", href: PUBLIC_URL + "/#projects", label: "Projects", out: true }] },
     { label: "Private", links: ROUTES.map(([i, l]) => ({ id: i, href: "#" + i, label: l })) }
   ], id);
   const main = document.getElementById("main");

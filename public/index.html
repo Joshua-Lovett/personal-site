@@ -13,6 +13,7 @@
 </head>
 <body>
 <script src="/assets/lib.js"></script>
+<script src="/assets/config.js"></script>
 <script>
 shell("#about");
 let P = null;
@@ -42,7 +43,7 @@ function render() {
   const id = cur();
   renderNav([
     { label: "Public", links: [{ id: "about", href: "#about", label: "About" }, { id: "projects", href: "#projects", label: "Projects" }] },
-    { label: "Private", links: [{ id: "private", href: "/private/", label: "Sign in", out: true }] }
+    { label: "Private", links: [{ id: "private", href: PRIVATE_URL, label: "Sign in", out: true }] }
   ], id);
   const main = document.getElementById("main");
   if (!P) { main.replaceChildren(h("div", { class: "err" }, "This page could not load. Refresh to try again.")); return; }

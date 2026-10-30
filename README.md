@@ -1,17 +1,16 @@
 # Joshua Lovett's personal site
 
-Static site, no build step. Deployed by Cloudflare Pages from the repository root.
+Two static sites in one repository, no build step. Each folder is its own Cloudflare Worker.
 
-- `/` public pages: About and Projects, content in `data/public.json`
-- `/private/` owner-only pages, protected by Cloudflare Access (must be set up before use)
-- `private/data/*.json` the private lists: `todos`, `goals`, `dreamboard`, `done`, `connections`. Each file is `{ "items": [...] }`.
+- `public/` is the open site (About, Projects). Content lives in `data/public.json`.
+- `private/` is the owner-only site, protected by Cloudflare Access on its own workers.dev address. Lists live in `private/data/*.json`, each as `{ "items": [...] }`.
 
 Item shapes:
 
 - todo: `{ id, title, date: "YYYY-MM-DD", start: "HH:MM", end: "HH:MM", tag, done, doneAt }`
 - goal: `{ id, title, why, area, target, progress: 0-100, steps: [{ t, done }] }`
-- dreamboard: `{ id, title, note, area, img: "/private/img/file.jpg" }`
+- dreamboard: `{ id, title, note, area, img: "/img/file.jpg" }`
 - done: `{ id, title, date, note, area }`
 - connection: `{ id, name, url, note }`
 
-Do not put private information anywhere outside `private/`.
+Never put private information inside `public/`.
