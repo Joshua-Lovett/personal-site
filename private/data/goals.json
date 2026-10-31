@@ -7,7 +7,28 @@
       "area": "",
       "target": "",
       "progress": 0,
-      "steps": []
+      "steps": [
+        {
+          "t": "Clean the shop and reorganize for more space",
+          "done": false
+        },
+        {
+          "t": "Get the electrical hooked up",
+          "done": false
+        },
+        {
+          "t": "Find a computer for the software",
+          "done": false
+        },
+        {
+          "t": "Install the software (Forest)",
+          "done": false
+        },
+        {
+          "t": "Test run the machine",
+          "done": false
+        }
+      ]
     },
     {
       "id": "g2-20261031",
