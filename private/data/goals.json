@@ -10,23 +10,28 @@
       "steps": [
         {
           "t": "Clean the shop and reorganize for more space",
-          "done": false
+          "done": false,
+          "id": "s1"
         },
         {
           "t": "Get the electrical hooked up",
-          "done": false
+          "done": false,
+          "id": "s2"
         },
         {
           "t": "Find a computer for the software",
-          "done": false
+          "done": false,
+          "id": "s3"
         },
         {
           "t": "Install the software (Forest)",
-          "done": false
+          "done": false,
+          "id": "s4"
         },
         {
           "t": "Test run the machine",
-          "done": false
+          "done": false,
+          "id": "s5"
         }
       ]
     },

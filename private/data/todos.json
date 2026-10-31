@@ -16,7 +16,11 @@
       "start": "",
       "end": "",
       "tag": "",
-      "done": false
+      "done": false,
+      "link": {
+        "goal": "g1-20261031",
+        "step": "s1"
+      }
     },
     {
       "id": "t3-20261031",
@@ -35,6 +39,19 @@
       "end": "",
       "tag": "",
       "done": false
+    },
+    {
+      "id": "t5-20261031",
+      "title": "Find a computer for the CNC software",
+      "date": "2026-11-06",
+      "start": "",
+      "end": "",
+      "tag": "CNC",
+      "done": false,
+      "link": {
+        "goal": "g1-20261031",
+        "step": "s3"
+      }
     }
   ]
 }

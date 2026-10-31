@@ -21,7 +21,26 @@ const cur = () => { const id = location.hash.slice(1); return ROUTES.some((r) =>
 let todoFilter = "today";
 try { todoFilter = localStorage.getItem("todoFilter") || "today"; } catch (e) {}
 
-const items = async (k) => (await load("/data/" + k + ".json")).items || [];
+const raw = async (k) => (await load("/data/" + k + ".json")).items || [];
+/* A to-do with link {goal, step} and that goal step share one done state. */
+function applyLinks(todos, goals) {
+  todos.forEach((t) => {
+    if (!t.link) return;
+    const g = goals.find((x) => x.id === t.link.goal);
+    const st = g && (g.steps || []).find((x) => x.id === t.link.step);
+    if (!st) return;
+    const d = !!(t.done || st.done);
+    t.done = d; st.done = d;
+    if (d && !t.doneAt) t.doneAt = t.date || todayStr();
+  });
+}
+const pct = (g) => (g.steps && g.steps.length ? Math.round(100 * g.steps.filter((x) => x.done).length / g.steps.length) : g.progress || 0);
+const items = async (k) => {
+  if (k !== "todos" && k !== "goals") return raw(k);
+  const [t, g] = await Promise.all([raw("todos"), raw("goals")]);
+  applyLinks(t, g);
+  return k === "todos" ? t : g;
+};
 
 /* ---- to-dos ---- */
 async function todosView() {
@@ -70,8 +89,8 @@ async function goalsView() {
         h("h3", {}, g.title),
         g.area ? h("div", {}, h("span", { class: "tag" }, g.area)) : null,
         g.why ? h("p", {}, g.why) : null,
-        h("div", { class: "bar" }, h("i", { style: "width:" + (g.progress || 0) + "%" })),
-        h("div", { class: "meter" }, h("span", {}, (g.progress || 0) + "% done"), g.target ? h("span", {}, "by " + fmtDay(g.target)) : null),
+        h("div", { class: "bar" }, h("i", { style: "width:" + pct(g) + "%" })),
+        h("div", { class: "meter" }, h("span", {}, pct(g) + "% done"), g.target ? h("span", {}, "by " + fmtDay(g.target)) : null),
         steps.length ? h("ul", { class: "steps" }, steps.map((s) => h("li", { class: s.done ? "done" : "" }, h("span", { class: "ck" }, s.done ? "✓" : ""), h("span", { class: "t" }, s.t)))) : null);
     })) : empty("No goals yet", "Tell Claude your goals and they will show up here."));
 }
