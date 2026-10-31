@@ -97,8 +97,13 @@ async function writeKey(env, key, request) {
     method: "PUT",
     body: JSON.stringify({ message: "Update " + key + " from the site", content: bytesToB64(bytes), sha: body.sha, branch: BRANCH }),
   });
-  if (r.status === 409 || r.status === 422) return json({ error: "conflict" }, 409);
-  if (!r.ok) return json({ error: "write_failed" }, 502);
+  if (r.status === 409) return json({ error: "conflict" }, 409);
+  if (!r.ok) {
+    let msg = "";
+    try { msg = String((await r.json()).message || "").slice(0, 200); } catch (e) {}
+    if (r.status === 422 && /sha/i.test(msg)) return json({ error: "conflict" }, 409);
+    return json({ error: "write_failed", github_status: r.status, github_message: msg }, 502);
+  }
   const out = await r.json();
   return json({ sha: out.content.sha });
 }

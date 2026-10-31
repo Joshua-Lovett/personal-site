@@ -6,6 +6,10 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Private | Joshua Lovett</title>
 <meta name="theme-color" content="#0b0909">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -29,10 +33,10 @@ let pending = 0, loadError = "";
 const items = (k) => (state[k] ? state[k].items : []);
 const uid = () => Math.random().toString(36).slice(2, 10);
 const val = (id) => document.getElementById(id).value.trim();
-function toast(msg) {
+function toast(msg, ms) {
   let t = document.getElementById("toast");
   if (!t) { t = h("div", { class: "toast", id: "toast", role: "status" }); document.body.append(t); }
-  t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 3200);
+  t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, ms || 3200);
 }
 async function pull(k) {
   const r = await fetch("/api/data/" + k, { cache: "no-store" });
@@ -50,9 +54,20 @@ function push(k) {
   chains[k] = (chains[k] || Promise.resolve()).then(async () => {
     const r = await fetch("/api/data/" + k, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: state[k].items, sha: state[k].sha }) });
     if (r.status === 409) { await pull(k); toast("This list changed somewhere else. It was reloaded, so please repeat your last change."); render(); return; }
-    if (!r.ok) throw new Error("save");
+    if (!r.ok) {
+      let d = {}; try { d = await r.json(); } catch (e) {}
+      const err = new Error("save"); err.detail = r.status === 401 ? "your sign-in expired, reload the page"
+        : d.github_status === 403 || d.github_status === 404 ? "GitHub refused the write, so the GitHub key probably lacks Contents: Read and write permission for this repository"
+        : d.github_status ? "GitHub said " + d.github_status + (d.github_message ? ": " + d.github_message : "")
+        : d.error === "not_configured" ? "the GITHUB_TOKEN secret is missing" : "server error " + r.status;
+      throw err;
+    }
     state[k].sha = (await r.json()).sha;
-  }).catch(() => { toast("Could not save that change. Check your connection and reload."); }).finally(() => { pending--; });
+  }).catch(async (e) => {
+    toast("Not saved: " + (e.detail || "could not reach the site") + ".", 12000);
+    try { await pull(k); } catch (e2) {}
+    render();
+  }).finally(() => { pending--; });
   return chains[k];
 }
 const touch = (...ks) => { ks.forEach(push); render(); };
