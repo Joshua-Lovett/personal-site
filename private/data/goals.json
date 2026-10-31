@@ -1,1 +1,22 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "id": "g1-20261031",
+      "title": "Get CNC running",
+      "why": "",
+      "area": "",
+      "target": "",
+      "progress": 0,
+      "steps": []
+    },
+    {
+      "id": "g2-20261031",
+      "title": "Fix acoustical panels design",
+      "why": "",
+      "area": "",
+      "target": "",
+      "progress": 0,
+      "steps": []
+    }
+  ]
+}
