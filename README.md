@@ -3,7 +3,8 @@
 Two static sites in one repository, no build step. Each folder is its own Cloudflare Worker.
 
 - `public/` is the open site (About, Projects). Content lives in `data/public.json`.
-- `private/` is the owner-only site, protected by Cloudflare Access on its own workers.dev address. Lists live in `private/data/*.json`, each as `{ "items": [...] }`.
+- `private/` is the owner-only site, protected by Cloudflare Access on its own workers.dev address. The page is in `private/site/`. `private/worker.js` is a small API that reads and writes the lists in this repository for the page, and only answers requests carrying a valid Cloudflare Access login. Lists live in `private/data/*.json`, each as `{ "items": [...] }`; they are not served as files.
+- Worker settings: `GITHUB_TOKEN` (secret, set in the Cloudflare dashboard), `TEAM_DOMAIN` and `POLICY_AUD` (in `private/wrangler.jsonc`).
 
 Item shapes:
 
