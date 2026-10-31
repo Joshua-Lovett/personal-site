@@ -10,7 +10,7 @@
       "steps": [
         {
           "t": "Clean the shop and reorganize for more space",
-          "done": false,
+          "done": true,
           "id": "s1"
         },
         {
