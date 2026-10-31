@@ -8,7 +8,7 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": {
-    "TEAM_DOMAIN": "",
-    "POLICY_AUD": ""
+    "TEAM_DOMAIN": "sparkling-paper-3c5c.cloudflareaccess.com",
+    "POLICY_AUD": "42714778c8f7d769d7b1df61bd20ed6229388f0449a81dc10be77c77c3cf53ce"
   }
 }
