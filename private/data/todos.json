@@ -7,7 +7,8 @@
       "start": "",
       "end": "",
       "tag": "",
-      "done": false
+      "done": true,
+      "doneAt": "2026-10-31"
     },
     {
       "id": "t2-20261031",
