@@ -1,14 +1,47 @@
 {
-  "name": ["Joshua", "Lovett"],
+  "name": [
+    "Joshua",
+    "Lovett"
+  ],
   "tagline": "Building things, finishing them, and writing down what is next.",
   "about": [
     "This is my corner of the web. Public pages cover who I am and what I have finished. Everything else is private: my goals, my dreamboard, my schedule, and a log of what I have done.",
     "I keep it current by telling Claude what I did and what is coming up, and the site updates itself."
   ],
   "facts": [
-    { "k": "Based in", "v": "United States" },
-    { "k": "Focus", "v": "Projects, websites, getting things done" },
-    { "k": "Currently", "v": "Building this site" }
+    {
+      "k": "Based in",
+      "v": "United States"
+    },
+    {
+      "k": "Focus",
+      "v": "Projects, websites, getting things done"
+    },
+    {
+      "k": "Currently",
+      "v": "Building this site"
+    }
   ],
-  "projects": []
+  "projects": [
+    {
+      "title": "Coffee Menu and Ordering Site",
+      "year": "2026",
+      "role": "Designed and built, for a friend's coffee business",
+      "summary": "A mobile-first website where customers see the menu with prices and order ahead for pickup, and the owner runs the shop from a sign-in. Customers choose a pickup time so drinks are made fresh, and pay when they collect.",
+      "highlights": [
+        "Menu with prices that the owner edits after signing in, with no code needed",
+        "Online ordering with a pickup ETA, payment at pickup",
+        "A phone notification to the owner for every new order",
+        "Open and closed button for the owner, so customers always see the current status",
+        "QR code that opens the site on any phone"
+      ],
+      "tools": [
+        "Netlify",
+        "GitHub",
+        "Supabase",
+        "ntfy"
+      ],
+      "url": "https://coffee-menu-test.netlify.app/"
+    }
+  ]
 }

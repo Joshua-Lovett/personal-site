@@ -167,3 +167,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); }
 .steps .done .ck { background: var(--red); border-color: var(--red); color: #fff; }
 .item .ck { width: 20px; height: 20px; border: 2px solid var(--muted); border-radius: 3px; display: grid; place-items: center; font-size: 13px; flex: none; }
 .item.is-done .ck { background: var(--red); border-color: var(--red); color: #fff; }
+
+.bullets { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.card .eyebrow { color: var(--red-hot); }

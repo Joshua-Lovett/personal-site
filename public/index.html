@@ -39,8 +39,11 @@ function projectsView() {
     P.projects.length
       ? h("div", { class: "grid" }, P.projects.map((p) => h("article", { class: "card" },
           h("div", { class: "top" }, h("h3", {}, p.title), p.year ? h("span", { class: "tag" }, p.year) : null),
+          p.role ? h("p", { class: "eyebrow", style: "margin:0" }, p.role) : null,
           h("p", {}, p.summary),
-          p.url ? h("a", { href: p.url, target: "_blank", rel: "noopener" }, "View project") : null)))
+          p.highlights && p.highlights.length ? h("ul", { class: "bullets" }, p.highlights.map((x) => h("li", {}, x))) : null,
+          p.tools && p.tools.length ? h("div", { class: "tags" }, p.tools.map((x) => h("span", { class: "tag" }, x))) : null,
+          p.url ? h("a", { class: "btn", style: "justify-self:start;text-decoration:none", href: p.url, target: "_blank", rel: "noopener" }, "Visit the site") : null)))
       : empty("Nothing published yet", "Finished projects appear here as soon as they are added."));
 }
 function render() {
