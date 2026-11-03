@@ -42,7 +42,13 @@
       "area": "",
       "target": "",
       "progress": 0,
-      "steps": []
+      "steps": [
+        {
+          "id": "srfhnict5",
+          "t": "Figure out how AI can help",
+          "done": false
+        }
+      ]
     }
   ]
 }
