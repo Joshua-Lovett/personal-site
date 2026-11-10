@@ -55,6 +55,51 @@
         "goal": "g1-20261031",
         "step": "s3"
       }
+    },
+    {
+      "id": "t1-20261110",
+      "title": "Watch history lectures",
+      "date": "2026-11-10",
+      "start": "",
+      "end": "",
+      "tag": "",
+      "done": false
+    },
+    {
+      "id": "t2-20261110",
+      "title": "Physics: read and do work",
+      "date": "2026-11-10",
+      "start": "",
+      "end": "",
+      "tag": "",
+      "done": false
+    },
+    {
+      "id": "t3-20261110",
+      "title": "Meet with Daniel",
+      "date": "2026-11-10",
+      "start": "",
+      "end": "",
+      "tag": "",
+      "done": false
+    },
+    {
+      "id": "t4-20261110",
+      "title": "Bible Class",
+      "date": "2026-11-10",
+      "start": "",
+      "end": "",
+      "tag": "",
+      "done": false
+    },
+    {
+      "id": "t5-20261110",
+      "title": "Clean up stuff around the house",
+      "date": "2026-11-10",
+      "start": "",
+      "end": "",
+      "tag": "",
+      "done": false
     }
   ]
 }
