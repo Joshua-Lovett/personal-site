@@ -63,7 +63,8 @@
       "start": "",
       "end": "",
       "tag": "",
-      "done": false
+      "done": true,
+      "doneAt": "2026-11-10"
     },
     {
       "id": "t2-20261110",
