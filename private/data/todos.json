@@ -93,7 +93,8 @@
       "start": "",
       "end": "",
       "tag": "",
-      "done": false
+      "done": true,
+      "doneAt": "2026-11-13"
     }
   ]
 }
